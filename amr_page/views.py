@@ -25,10 +25,11 @@ def index(request):
         if form.is_valid():
             try:
                 key = ''.join([random.choice(list('0123456789abcdef')) for i in range(16)])
-                search: bool = form.cleaned_data['yt_search'] if form.cleaned_data['yt_url'] != '' else None
+                search: bool = form.cleaned_data['yt_search']
+                print('SEARCH:',search)
                 amr_data[key] = Download.yt_url(search if search else form.cleaned_data['yt_url'], quality=form.cleaned_data['quality'], search=(search != None))
 
-                return HttpResponseRedirect('amr-data/' + key)
+                return HttpResponseRedirect('amr-data/' + key + '.amr')
             except OSError as err:
                 # raise err
                 return HttpResponseServerError('<h2>Error 500</h2><br/>Internal server error.<br/><pre>{}</pre>'.format(str(err)))
@@ -43,7 +44,7 @@ def index(request):
 
 def get_amrdata(request):
     try:
-        key = request.path.split('/')[-1]
+        key = request.path.split('/')[-1][:-4]      # -4 gets rid of .amr
         data = amr_data.pop(key)
         return HttpResponse(content=data, content_type='audio/AMR')
     except KeyError:

@@ -1,0 +1,13 @@
+To create a user for the login page:
+
+	python3 manage.py createsuperuser
+
+To run locally:
+
+	python3 manage.py runserver
+
+To run as Docker:
+
+	docker build --tag amrserver .
+	docker run -p 8000:8000 -it amrserver
+

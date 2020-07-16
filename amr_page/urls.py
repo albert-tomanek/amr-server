@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path   ('', views.index, name='index'),
-    re_path('^amr-data/[0123456789abcdef]+$', views.get_amrdata),
+    re_path('^amr-data/[0123456789abcdef]+.amr$', views.get_amrdata),
 ]

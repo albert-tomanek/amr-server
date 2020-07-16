@@ -10,7 +10,7 @@ def system_(cmd):
     print(cmd)
     p = subprocess.Popen(shlex.split(cmd), stderr=subprocess.PIPE, shell=False, bufsize=-1)
     p.wait()
-    if p.returncode is not 0:
+    if p.returncode != 0:
         raise OSError('Command returned {}: `{}`\n\n{}'.format(p.returncode, cmd, p.stderr.read().decode('utf-8')))
 
 class Download:
