@@ -1,0 +1,13 @@
+<html>
+<body>
+	<h1>YouTube AMR downloader</h1>
+
+	<form method="post">
+		<table>
+	    {% csrf_token %}
+	    {{ download_form }}
+	</table>
+	    <input type="submit" value="OK">
+	</form>
+</body>
+</html>
