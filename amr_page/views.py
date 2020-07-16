@@ -5,6 +5,7 @@ from typing import Dict
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from .forms import *
 from .downloader import Download
@@ -13,6 +14,7 @@ import random
 
 amr_data: Dict[str, bytes] = {}
 
+@login_required()
 def index(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
